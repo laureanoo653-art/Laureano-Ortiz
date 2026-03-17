@@ -18,7 +18,15 @@ export default function ProductCard({ producto, agregar }) {
         <h3 className="font-semibold text-lg mb-1">
           {producto.nombre}
         </h3>
-
+// Dentro de tu componente ProductCard.jsx
+<motion.button
+  whileTap={{ scale: 0.95 }}
+  whileHover={{ scale: 1.02 }}
+  onClick={() => agregar(producto)}
+  className="..."
+>
+  Agregar al carrito
+</motion.button>
         <p className="text-xl font-bold text-green-600 mb-3">
           ${producto.precio}
         </p>
