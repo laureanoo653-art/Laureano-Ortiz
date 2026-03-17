@@ -16,11 +16,12 @@ export default function App() {
   // 🛒 PRODUCTOS (demo)
   const [productos, setProductos] = useState([]);
 
+// El nuevo código conectado a la nube:
 useEffect(() => {
-  fetch("http://127.0.0.1:8000/api/productos/")
+  fetch("https://ferreteria-backend-hu9g.onrender.com/api/productos/") 
     .then(res => res.json())
     .then(data => setProductos(data))
-    .catch(err => console.log(err));
+    .catch(err => console.error("Error conectando a la API:", err));
 }, []);
 
   // 🔍 FILTRO
