@@ -73,7 +73,7 @@ useEffect(() => {
       <header className="bg-white shadow-sm px-8 py-4 flex justify-between items-center sticky top-0 z-50">
 
   <h1 className="text-2xl font-bold tracking-tight">
-    🔧 Ferretería Pro
+    🔧 Ferretería Salón Víctor
   </h1>
 
   <div className="flex gap-3">
