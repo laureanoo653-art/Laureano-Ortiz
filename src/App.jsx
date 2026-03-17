@@ -4,6 +4,7 @@ import ProductCard from "./components/ProductCard";
 
 export default function App() {
   // 🧠 ESTADOS
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Simulación de sesión
   const [carrito, setCarrito] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [catActiva, setCatActiva] = useState("Todas");
@@ -58,7 +59,7 @@ export default function App() {
   return (
     <div className="bg-[#f8f9fa] min-h-screen font-sans selection:bg-yellow-200">
       
-      {/* 1. NAVBAR (Distribución Pro: Logo | Buscador | Botón) */}
+      {/* 1. NAVBAR (Logo | Buscador | Auth & WhatsApp) */}
 <header className="bg-white/90 backdrop-blur-md shadow-sm px-8 py-3 flex items-center sticky top-0 z-50 border-b border-gray-100">
   
   {/* IZQUIERDA: Logo */}
@@ -84,11 +85,24 @@ export default function App() {
     </div>
   </div>
 
-  {/* DERECHA: Botón WhatsApp */}
-  <div className="flex items-center justify-end gap-4 flex-shrink-0 w-1/4">
-    <button className="hidden xl:block text-xs font-bold text-gray-400 uppercase tracking-tight hover:text-black transition">
-      Sobre Nosotros
-    </button>
+  {/* DERECHA: Login/Logout & WhatsApp */}
+  <div className="flex items-center justify-end gap-3 flex-shrink-0 w-1/4">
+    {isLoggedIn ? (
+      <button 
+        onClick={() => setIsLoggedIn(false)}
+        className="text-xs font-bold text-red-500 uppercase tracking-tight hover:bg-red-50 px-3 py-2 rounded-xl transition flex items-center gap-1"
+      >
+        <span>Logout</span> 🚪
+      </button>
+    ) : (
+      <button 
+        onClick={() => setIsLoggedIn(true)}
+        className="text-xs font-bold text-blue-600 uppercase tracking-tight hover:bg-blue-50 px-3 py-2 rounded-xl transition flex items-center gap-1"
+      >
+        <span>Login</span> 👤
+      </button>
+    )}
+
     <button 
       onClick={enviarWhatsApp} 
       className="bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 rounded-full font-bold text-sm flex items-center gap-2 transition-all shadow-md active:scale-95"
@@ -197,12 +211,11 @@ export default function App() {
             <span className="text-gray-500 text-sm">Total</span>
             <span className="text-2xl font-black text-gray-900">${total}</span>
           </div>
-          <button onClick={enviarWhatsApp} disabled={carrito.length === 0}
-            className={`w-full py-4 rounded-2xl font-bold text-white transition-all shadow-lg ${
-              carrito.length > 0 ? "bg-black hover:bg-gray-800 shadow-gray-200" : "bg-gray-300 cursor-not-allowed"
-            }`}>
-            Confirmar Pedido
-          </button>
+          {isLoggedIn ? (
+  <button onClick={enviarWhatsApp} className="...">Confirmar Pedido</button>
+) : (
+  <p className="text-center text-xs text-gray-500">Iniciá sesión para comprar</p>
+)}
         </div>
       </div>
 
