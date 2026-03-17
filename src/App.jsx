@@ -58,21 +58,46 @@ export default function App() {
   return (
     <div className="bg-[#f8f9fa] min-h-screen font-sans selection:bg-yellow-200">
       
-      {/* 1. NAVBAR (Limpio y pegado arriba) */}
-      <header className="bg-white/90 backdrop-blur-md shadow-sm px-8 py-4 flex justify-between items-center sticky top-0 z-50 border-b border-gray-100">
-        <div className="flex items-center gap-2">
-          <span className="text-3xl">🔧</span>
-          <h1 className="text-2xl font-extrabold bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent">
-            Ferretería Pro
-          </h1>
-        </div>
-        <div className="flex items-center gap-4">
-          <button className="hidden sm:block text-sm font-medium text-gray-600 hover:text-black">Sobre Nosotros</button>
-          <button onClick={enviarWhatsApp} className="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-full font-semibold flex items-center gap-2 transition-all shadow-md shadow-green-200">
-            💬 Pedir por WhatsApp
-          </button>
-        </div>
-      </header>
+      {/* 1. NAVBAR (Distribución Pro: Logo | Buscador | Botón) */}
+<header className="bg-white/90 backdrop-blur-md shadow-sm px-8 py-3 flex items-center sticky top-0 z-50 border-b border-gray-100">
+  
+  {/* IZQUIERDA: Logo */}
+  <div className="flex items-center gap-2 flex-shrink-0 w-1/4">
+    <span className="text-2xl">🔧</span>
+    <h1 className="text-xl font-extrabold bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent hidden lg:block">
+      Ferretería Pro
+    </h1>
+  </div>
+
+  {/* CENTRO: Buscador */}
+  <div className="flex-1 flex justify-center px-4">
+    <div className="relative w-full max-w-md">
+      <span className="absolute inset-y-0 left-4 flex items-center text-gray-400">
+        🔍
+      </span>
+      <input
+        placeholder="¿Qué herramienta buscás?"
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+        className="w-full pl-11 pr-4 py-2.5 rounded-2xl bg-gray-100 border-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all outline-none text-sm shadow-inner"
+      />
+    </div>
+  </div>
+
+  {/* DERECHA: Botón WhatsApp */}
+  <div className="flex items-center justify-end gap-4 flex-shrink-0 w-1/4">
+    <button className="hidden xl:block text-xs font-bold text-gray-400 uppercase tracking-tight hover:text-black transition">
+      Sobre Nosotros
+    </button>
+    <button 
+      onClick={enviarWhatsApp} 
+      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 rounded-full font-bold text-sm flex items-center gap-2 transition-all shadow-md active:scale-95"
+    >
+      <span className="text-base">💬</span> 
+      <span className="hidden sm:inline">Pedir</span>
+    </button>
+  </div>
+</header>
 
       {/* 2. SECCIÓN HERO (Impacto visual) */}
       <div className="relative h-[450px] w-full flex items-center justify-center overflow-hidden">
