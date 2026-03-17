@@ -18,10 +18,10 @@ export default function App() {
 
 // El nuevo código conectado a la nube:
 useEffect(() => {
-  fetch("https://ferreteria-backend-hu9g.onrender.com/api/productos/") 
+  fetch("https://ferreteria-backend-hu9g.onrender.com/api/productos/")
     .then(res => res.json())
     .then(data => setProductos(data))
-    .catch(err => console.error("Error conectando a la API:", err));
+    .catch(err => console.error("Error cargando productos:", err));
 }, []);
 
   // 🔍 FILTRO
@@ -47,17 +47,25 @@ useEffect(() => {
   // 💰 TOTAL
   const total = carrito.reduce((acc, p) => acc + p.precio, 0);
 
-  // 📲 WHATSAPP
+  // 📲 WHATSAPP}
   const enviarWhatsApp = () => {
-    let mensaje = "Hola, quiero pedir:%0A";
-    carrito.forEach(p => {
-      mensaje += `- ${p.nombre} ($${p.precio})%0A`;
-    });
-    mensaje += `%0ATotal: $${total}`;
+  if (carrito.length === 0) {
+    alert("¡Tu carrito está vacío! Agrega algunos productos primero.");
+    return;
+  }
 
-    window.open(`https://wa.me/549XXXXXXXXXX?text=${mensaje}`);
-  };
+  let mensaje = "Hola! 👋 Quiero realizar el siguiente pedido:%0A%0A";
+  
+  carrito.forEach((p) => {
+    mensaje += `✅ ${p.nombre} - $${p.precio}%0A`;
+  });
 
+  mensaje += `%0A*Total a pagar: $${total}*`;
+
+  const numeroTelefono = "5493402658058"; 
+  const url = `https://wa.me/${numeroTelefono}?text=${mensaje}`;
+  window.open(url, "_blank");
+};
   return (
     <div className="bg-gray-100 min-h-screen">
 
@@ -73,12 +81,12 @@ useEffect(() => {
       Categorías
     </button>
 
-    <button
-      onClick={enviarWhatsApp}
-      className="bg-green-500 text-white px-5 py-2 rounded-xl hover:bg-green-600 transition shadow"
-    >
-      WhatsApp
-    </button>
+    <button 
+  onClick={enviarWhatsApp}
+  className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+>
+  Enviar pedido por WhatsApp
+</button>
   </div>
 
 </header>

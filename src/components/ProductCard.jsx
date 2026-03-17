@@ -7,7 +7,11 @@ export default function ProductCard({ producto, agregar }) {
       className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition duration-300"
     >
       <div className="overflow-hidden">
-        src={producto.imagen}
+        <img
+          src={`https://ferreteria-backend-hu9g.onrender.com${producto.imagen}`}
+          alt={producto.nombre}
+          className="w-full h-full object-cover"
+        />
       </div>
 
       <div className="p-4">
